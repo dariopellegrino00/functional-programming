@@ -1,0 +1,8 @@
+module StringsPlay = 
+  struct
+    (**)
+    
+    
+
+
+  end;;
