@@ -22,7 +22,7 @@ module Freq =
     let str2 = String.lowercase_ascii "Kattarak dei kattarak el Babun el sief babun lollo babbo lollo";;
 
     (*check if a character c is a lettee*)
-    let is_letter c = 
+    let is_lowercase_letter c = 
       let f c = List.exists (fun x -> x = (Char.code c)) [192; 193; 194; 195; 199; 201; 202; 205; 211; 212; 218; 213; 224; 225; 226; 227; 231; 233; 234; 237; 243; 245; 244; 250] in
       if (((Char.code c) >= 97) && (Char.code c) <= 122) || f c then true else false;;
 
@@ -32,7 +32,7 @@ module Freq =
     (*remove special characters, not included in words*)
     let rec filter_string_list str_list = 
       let filter_string string = 
-        String.fold_left (fun acc x -> if (is_letter x) then (acc^(String.make 1 x) ) else acc) "" string in
+        String.fold_left (fun acc x -> if (is_lowercase_letter x) then (acc^(String.make 1 x) ) else acc) "" string in
       match str_list with
       | l :: ls -> filter_string l :: (filter_string_list ls) 
       | _       -> [];; 
