@@ -1,2 +1,7 @@
 # my-ocaml-implementations
-exercises for learning functional programming and ocaml 
+-LAB01
+  - Matrix ✅
+  - Frequencies ✅
+  - Play with strings ❌
+    
+  
