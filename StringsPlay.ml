@@ -1,6 +1,6 @@
 module StringsPlay = 
   struct
-    (**)
+    (*ss*)
     
     
 
