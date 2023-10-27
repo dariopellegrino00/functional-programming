@@ -16,7 +16,7 @@ module Freq =
         List.rev !lines ;;
 
      (*concat each element of the string list read from the file into one string*)
-    let str1 = List.fold_left (fun acc x -> x ^ acc) "" (List.rev (read_file "lab01/text.txt"));; 
+    let str1 = List.fold_left (fun acc x -> x ^ acc) "" (List.rev (read_file "my-ocaml-impl/inputs/text.txt"));; 
      
     (*test string*)  
     let str2 = String.lowercase_ascii "Kattarak dei kattarak el Babun el sief babun lollo babbo lollo";;

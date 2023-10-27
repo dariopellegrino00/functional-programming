@@ -1,7 +1,8 @@
 # my-ocaml-implementations
--LAB01
+-LAB0
   - Matrix ✅
   - Frequencies ✅
   - Play with strings ❌
+  - Trigo ❌
     
   
