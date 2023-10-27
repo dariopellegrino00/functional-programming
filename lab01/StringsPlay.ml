@@ -10,8 +10,10 @@ module StringsPlay =
     (*check if a string is palindrome, string can be read the same way 
        in either directions in spite of spaces, punctual and letter cases, e.g., detartrated *)
     let is_palindrome str = 
-      let filtered = str |> String.lowercase_ascii |> String.fold_left (fun acc x -> if (is_lowercase_letter x) then ((String.make 1 x) ^ acc) else acc) "" in 
-      let rec f n = if (filtered.[(String.length filtered) - n - 1 ] = filtered.[n]) && not(n < (String.length filtered) - n - 1) then f (n-1) else if (n < (String.length filtered) - n - 1) then true else false in 
+      let filtered = str |> String.lowercase_ascii |> String.fold_left (fun acc x -> if (is_lowercase_letter x) 
+        then ((String.make 1 x) ^ acc) else acc) "" in 
+      let rec f n = if (filtered.[(String.length filtered) - n - 1 ] = filtered.[n]) && not(n < (String.length filtered) - n - 1) 
+        then f (n-1) else if (n < (String.length filtered) - n - 1) then true else false in 
       f (String.length filtered - 1);;
 
     is_palindrome "Do geese see God?";; (* true*)
@@ -21,9 +23,16 @@ module StringsPlay =
     is_palindrome "Do    DO";; (* false*)
     is_palindrome "cassasa aagafa";; (* false*)
 
-    
-        
-        
-        
+    let (-) str1 str2 =    
+      let filter c str = String.fold_right (fun i acc -> if (c <> i) then (String.make 1 i) ^ acc else acc) str "" in 
+      let rec f n = 
+        match n with
+         0 -> filter str2.[0] str1
+        |_ -> filter str2.[n] (f (n-1)) in
+      f ((String.length str2) - 1);;
 
+    "Walter Cazzola" - "abcwxyz";;
+    "KkattArAkK bel Babun" - "Kba";;
+    
+      
   end;;
