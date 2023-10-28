@@ -23,7 +23,9 @@ module StringsPlay =
     is_palindrome "Do    DO";; (* false*)
     is_palindrome "cassasa aagafa";; (* false*)
 
-    let (-) str1 str2 =    
+    (* operator less for strings it remove all the character in the first String str1 
+       that matches any of the characters in the second string, the operator is case sensitive*)
+    let (-^) str1 str2 =    
       let filter c str = String.fold_right (fun i acc -> if (c <> i) then (String.make 1 i) ^ acc else acc) str "" in 
       let rec f n = 
         match n with
@@ -31,8 +33,43 @@ module StringsPlay =
         |_ -> filter str2.[n] (f (n-1)) in
       f ((String.length str2) - 1);;
 
-    "Walter Cazzola" - "abcwxyz";;
-    "KkattArAkK bel Babun" - "Kba";;
-    
+    "AbCbEfG" -^ "abcdefg";; (*ACEG*)
+    "Dario Pellegrino" -^ "abcdewxyz";; (*Drio Pllgrino*)
+    "KkattArAkK bel Babun" -^ "Kba";; (*kttArAk el Bun*)
+
+    (* remove all blank spaces from a String *)
+    let strip str = String.fold_right (fun i acc -> if (i <> ' ') then (String.make 1 i) ^ acc else acc) str "";;
+    strip "aaa aa";;
+
+    (* check if the String str is anagram of one or more String contained in str_list *)
+    let rec anagram str str_lst =
+      let sort_string str = str |> String.to_seq |> List.of_seq |> List.sort Char.compare |> List.to_seq |> String.of_seq in
+      let sorted = str |> strip |> String.lowercase_ascii |> sort_string in
+      match str_lst with 
+       []      -> false
+      |s :: sl -> if (String.equal (s |> strip |> String.lowercase_ascii |> sort_string) sorted) 
+                      then true else anagram str sl;;
+
+    let s1 = "kattarak el babun";; 
+    let s2 = "casa";;
+    let s3 = "abba";;
+    let sl1 = ["kattabun el  barak"; "kattabun el    tarak"; "kbatatunk le  bara"];; 
+    let sl2 = ["casa"; "saca" ; "saac"; "sasa"; "caas"];;
+    let sl3 = ["aba"; "bab" ; "aaba"];;
+    anagram s1 sl1;; (* true *)
+    anagram s2 sl2;; (* true *)
+    anagram s3 sl3;; (* false *)
+
+    let rec anagramv2 str str_lst =
+      let sort_string s = s |> String.to_seq |> List.of_seq |> List.sort Char.compare |> List.to_seq |> String.of_seq in
+      let sorted = str |> strip |> String.lowercase_ascii |> sort_string in
+      match str_lst with 
+       []      -> []
+      |s :: sl -> if (String.equal (s |> strip |> String.lowercase_ascii |> sort_string) sorted)
+                      then (true, s) :: (anagramv2 str sl) else (false, s) :: (anagramv2 str sl);;
+
+    anagramv2 s1 sl1;; (* [(true, "kattabun el  barak"); (false, "kattabun el    tarak"); (true, "kbatatunk le  bara")]*)
+    anagramv2 s2 sl2;; (* [(true, "casa"); (true, "saca"); (true, "saac"); (false, "sasa"); (true, "caas")]*)
+    anagramv2 s3 sl3;; (* [(false, "aba"); (false, "bab"); (false, "aaba")]*)
       
   end;;
