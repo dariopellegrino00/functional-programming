@@ -2,7 +2,7 @@
 -LAB0
   - Matrix ✅
   - Frequencies ✅
-  - Play with strings ❌
+  - Play with strings ✅
   - Trigo ❌
     
   
