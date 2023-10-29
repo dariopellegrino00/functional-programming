@@ -3,6 +3,6 @@
   - Matrix ✅
   - Frequencies ✅
   - Play with strings ✅
-  - Trigo ❌
+  - Trigo ✅
     
   
