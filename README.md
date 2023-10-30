@@ -4,6 +4,6 @@
   - Frequencies ✅
   - Play with strings ✅
   - Trigo ✅
-  - Polish Notation ❌
+  - Polish Notation ✅
     
   
