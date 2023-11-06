@@ -12,5 +12,5 @@
 
 - Erlang
    - Practice 1 
-      - Fact Module ❌
+      - Fact Module ✅
   
