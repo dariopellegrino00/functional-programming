@@ -14,4 +14,6 @@
    - Lab03 
       - Fact Module ✅
       - Sequential Module ✅
+      - Expressions Module ❌
+      - Ring Module ❌
   
