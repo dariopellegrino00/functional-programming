@@ -15,5 +15,6 @@
       - Fact Module ✅
       - Sequential Module ✅
       - Expressions Module ❌
-      - Ring Module ❌
+      - Ring Module ✅
+      - Ping Pong Server ❌
   
