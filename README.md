@@ -16,5 +16,5 @@
       - Sequential Module ✅
       - Expressions Module ❌
       - Ring Module ✅
-      - Ping Pong Server ❌
+      - Echo Module (Ping Pong Server) ❌
   
