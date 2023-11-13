@@ -11,6 +11,10 @@
     - Social Networks ❌
 
 - Erlang
-   - Practice 1 
+   - Lab03 
       - Fact Module ✅
+      - Sequential Module ✅
+      - Expressions Module ❌
+      - Ring Module ✅
+      - Echo Module (Ping Pong Server) ❌
   
