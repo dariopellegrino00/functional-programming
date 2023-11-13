@@ -2,7 +2,7 @@
 -export([start/0, print/1, stop/0, loop/0]).
 
 start() ->  try 
-                register(echo, spawn(echo, loop, []))
+                register(server, spawn(?MODULE, loop, []))
             catch
                 error:badarg -> io:format("The echo server is already started~n")
             end,
@@ -10,14 +10,14 @@ start() ->  try
 
 
 print(Term) ->  try
-                    echo!{input, Term}
+                    server!{input, Term}
                 catch 
                     error:badarg -> io:format("The echo server has not started yet, try to run 'echo:start()'  and then rerun this command~n")
                 end,
                 ok.
 
 stop() ->   try
-                echo!{stop, "stop"}
+                server!{stop, "stop"}
             catch 
                 error:badarg -> io:format("The echo server has not started yet, try to run 'echo:start()' and then rerun this command~n")
             end,
@@ -25,13 +25,12 @@ stop() ->   try
 
 loop() -> 
     receive 
-        {input, M} -> io:format("~p: ~p~n", [echo, M]),
-                    loop();
-        {stop, _}  -> io:format("~p stopping \n", [echo]),
-                    exit(echo),
-                    unregister(echo);
-        other -> io:format("~p: error", [echo]),
-                loop()
+        {input, M} ->   io:format("~p: ~p~n", [server, M]),
+                        loop();
+        {stop, _}  ->   io:format("~p stopping \n", [server]),
+                        exit(stopped);
+        other ->    io:format("~p: error", [server]),
+                    loop()
     end.
     
 
