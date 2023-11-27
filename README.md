@@ -18,4 +18,7 @@
       - Ring Module ✅
       - Echo Module (Ping Pong Server) ✅
       - Dummy Calls Counter Server ✅
+  - Lab04
+      - List Comprehensions ✅
+      - Distributed Associative Store ❌
   
