@@ -20,5 +20,7 @@
       - Dummy Calls Counter Server ✅
   - Lab04
       - List Comprehensions ✅
-      - Distributed Associative Store ❌
+      - Associative Store ❌
+        - Not Distributed ❌
+        - Distributed ✅
   
