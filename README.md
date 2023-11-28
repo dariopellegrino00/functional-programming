@@ -1,4 +1,4 @@
-# my-ocaml-implementations
+# my-lp-implementations
 - Ocaml Labs
   - Lab01
     - Matrix ✅
