@@ -23,4 +23,6 @@
       - Associative Store ❌
         - Not Distributed ❌
         - Distributed ✅
+      - Master Slaves ❌
+        - V1 ✅
   
