@@ -25,4 +25,5 @@
         - Distributed ✅
       - Master Slaves ❌
         - V1 ✅
+      - Distributed Reverse String ❌
   

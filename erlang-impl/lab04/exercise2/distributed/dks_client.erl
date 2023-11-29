@@ -5,8 +5,8 @@
   lookup/1
 ]).
 
--define(NODE1, n1@PCDario).
--define(NODE2, n2@PCDario).
+-define(NODE1, n1@PCDario). % Pc name may change
+-define(NODE2, n2@PCDario). % Pc name may change
 -define(MODULE_SERVER, dkvs_server).
 
 store(K, V) ->
