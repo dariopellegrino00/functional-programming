@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-# my-ocaml-implementations
-- Ocaml Labs
-=======
 # my-fp-implementations
 - Ocaml
->>>>>>> Stashed changes
   - Lab01
     - Matrix ✅
     - Frequencies ✅
