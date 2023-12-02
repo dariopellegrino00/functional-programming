@@ -1,5 +1,5 @@
-# my-lp-implementations
-- Ocaml Labs
+# my-fp-implementations
+- Ocaml
   - Lab01
     - Matrix ✅
     - Frequencies ✅
