@@ -27,4 +27,6 @@
         - V1 ✅
       - Distributed Reverse String ❌
         - V1 ✅
+      - Bank System ❌
+      - Joseph Problem ✅
   
