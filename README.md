@@ -1,24 +1,24 @@
-# my-ocaml-implementations
-- Ocaml Labs
-  - Lab01
+# my-fp-implementations
+- Ocaml
+  - easierProblems
     - Matrix ✅
     - Frequencies ✅
     - Play with strings ✅
     - Trigo ✅
     - Polish Notation ✅
-  - Lab02 
+  - advancedProblems 
     - Graph Type and Module ✅
     - Social Networks ❌
 
 - Erlang
-   - Lab03 
+   - easierProblems 
       - Fact Module ✅
       - Sequential Module ✅
       - Expressions Module ❌
       - Ring Module ✅
       - Echo Module (Ping Pong Server) ✅
       - Dummy Calls Counter Server ✅
-  - Lab04
+  - advancedProblems
       - List Comprehensions ✅
       - Associative Store ❌
         - Not Distributed ❌
@@ -26,4 +26,7 @@
       - Master Slaves ❌
         - V1 ✅
       - Distributed Reverse String ❌
+        - V1 ✅
+  - Bank System ATM ❌
+  - Joseph Problem ✅
   
