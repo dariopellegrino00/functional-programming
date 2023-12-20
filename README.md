@@ -30,3 +30,7 @@
   - Bank System ATM ❌
   - Joseph Problem ✅
   
+- Scala
+  - First Look at Scala
+    - OOP (classes, traits, objects) ✅
+    - Functional programming ❌
