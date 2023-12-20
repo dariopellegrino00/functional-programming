@@ -29,6 +29,7 @@
         - V1 ✅
   - Bank System ATM ❌
   - Joseph Problem ✅
+  - Pass-Through Architecture Palindromicity ❌
   
 - Scala
   - First Look at Scala
