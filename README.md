@@ -33,4 +33,4 @@
 - Scala
   - First Look at Scala
     - OOP (classes, traits, objects) ✅
-    - Functional programming ❌
+    - Functional programming ✅ (Refactoring ❌)
