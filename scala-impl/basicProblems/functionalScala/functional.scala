@@ -8,9 +8,6 @@ class Functional{
     def isAnagram(str: String, strList: List[String]) = {
         strList.exists(x => x.toSet.equals(str.toSet) && x.length() == str.length())
     } 
-
-
-    
         
     def factors(n: Int): List[Int] = n match{
         case 1 => List.empty
@@ -55,6 +52,7 @@ object Functional {
 
         println(("isProper() (is a perfect number)"))
         println("the perfect numbers between 1 and 10000 are")
-        println((1 to 10000).filter(x => func.isProper(x)).toList)
+ 
+       println((1 to 10000).filter(x => func.isProper(x)).toList)
     }
 }
