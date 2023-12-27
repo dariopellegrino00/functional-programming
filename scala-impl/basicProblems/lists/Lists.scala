@@ -12,10 +12,12 @@ class Lists {
         }
 
     def intersect(list1: List[Any], list2: List[Any]): List[Any] = 
-        list1.intersect(list2)
+        for (y <- list1 if !{for {x <- list2 if (x == y)} yield x}.isEmpty) yield y
+        //list1.intersect(list2)
 
     def symmetric_difference(list1: List[Any], list2: List[Any]): List[Any] = 
-        list1.diff(list2) ++ (list2.diff(list1))
+        for (x <- list1) yield x
+        //list1.diff(list2) ++ (list2.diff(list1))
 }
 
 

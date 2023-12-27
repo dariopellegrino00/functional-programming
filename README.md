@@ -38,3 +38,8 @@
   - Basic Problems
     - Functional problems ✅
     - List Problems ✅
+    - Distributed Reverse String ❌
+    - Algebra ✅ (Refactoring) ❌
+    - KWIC ❌
+    - Goldbach ✅
+
