@@ -34,4 +34,17 @@
 - Scala
   - First Look at Scala
     - OOP (classes, traits, objects) ✅
-    - Functional programming ✅ (Refactoring ❌)
+    - Functional programming ✅ 
+  - Basic Problems
+    - Functional problems ✅
+    - List Problems ✅
+    - Distributed Reverse String ❌
+    - Algebra ✅ (Refactoring) ❌
+    - KWIC ❌
+    - Goldbach ✅
+    - Matrix ✅ (Refactoring) ❌
+  - Advanced Problems 
+    - DSL Calculator ✅
+    - Desk ✅
+    - LogLang ❌ (Unfinished)
+    - ArnoldC ✅
