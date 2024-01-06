@@ -42,4 +42,9 @@
     - Algebra ✅ (Refactoring) ❌
     - KWIC ❌
     - Goldbach ✅
-
+    - Matrix ✅ (Refactoring) ❌
+  - Advanced Problems 
+    - DSL Calculator ✅
+    - Desk ✅
+    - LogLang ❌ (Unfinished)
+    - ArnoldC ✅
