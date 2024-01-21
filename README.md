@@ -8,6 +8,11 @@
     - Polish Notation ✅
   - advancedProblems 
     - Graph Type and Module ✅
+    - Arithmetic expression parser and evaluator (with step by step) ✅
+    - Goldbach ✅
+    - Naturals ✅
+    - Qsort continuation style ✅ 
+    - Primality ❌
     - Social Networks ❌
 
 - Erlang

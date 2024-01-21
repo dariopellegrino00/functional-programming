@@ -61,17 +61,18 @@ module Graph =
   end;;
 
 
-  module Main =
-    struct
-      let graph = Graph.empty();; 
+module Main =
+  struct
+    let graph = Graph.empty();; 
 
-      Graph.add_vertex graph (Vertex 0);;
-      Graph.add_vertex graph (Vertex 1);; 
-      Graph.add_vertex graph (Vertex 2);;
-      
-      Graph.add_edge graph (Edge (2, (Vertex 0), (Vertex 1)));;
-      Graph.add_edge graph (Edge (1, (Vertex 0), (Vertex 2)));;
-      Graph.add_edge graph (Edge (1, (Vertex 2), (Vertex 0)));;
-      Graph.add_edge graph (Edge (3, (Vertex 1), (Vertex 2)));;
-
-  end;;
+    Graph.add_vertex graph (Vertex 0);;
+    Graph.add_vertex graph (Vertex 1);; 
+    Graph.add_vertex graph (Vertex 2);;
+    
+    Graph.add_edge graph (Edge (2, (Vertex 0), (Vertex 1)));;
+    Graph.add_edge graph (Edge (1, (Vertex 0), (Vertex 2)));;
+    Graph.add_edge graph (Edge (1, (Vertex 2), (Vertex 0)));;
+    Graph.add_edge graph (Edge (3, (Vertex 1), (Vertex 2)));;
+    
+    print_string("end of graph\n")
+end;;
