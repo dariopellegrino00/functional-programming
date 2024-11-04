@@ -1,50 +1,64 @@
-
-
 -module(ring).
--export([start/3, create/3]).
+-export([start/3]).
 
-start(M, N, Msg) -> 
-  register(first, spawn(?MODULE, create, [N, 1, self()])),
-  io:format(" [first] address is ~p~n", [whereis(first)]),
-  receive 
-    ready -> ok
-    after 5000 -> exit(timeout)
-  end,
-  send_message(M, 1, Msg),
-  first ! stop,
-  ok.
+start(_, N, _) when N =< 1 -> {error, "ring must have at least 2 processes"};
+start(M, _, _) when M =< 0 -> {error, "ring must pass at least 1 message"};
 
-send_message(M, M, Msg) -> first!{Msg, M, 1};
-send_message(M, N, Msg) -> first!{Msg, N, 1}, send_message(M, N+1, Msg).
+start(N, M, Message) -> 
+    First = spawn(fun() -> first_worker_loop(1, M-1, none) end),
+    First!{new_next, create_ring(N, First), self()},
+    io:format("Worker 1: created!\n"), 
+    receive
+        {received} -> 
+            First!{first_msg, Message},
+            {ok, "all messages sent"};
+        _ -> {error, "error"}
+    end.
 
-create(1, Who, Starter) ->
-  Starter ! ready,
-  io:format(" created [~p] as ~p connected to ~p~n", [self(), Who, first]),
-  last_loop(first, Who);
-create(N, Who, Starter) ->
-  Next = spawn(?MODULE, create, [N-1, Who+1, Starter]),
-  io:format(" created [~p] as ~p connected to ~p~n", [self(), Who, Next]),
-  loop(Next, Who).
+create_ring(1, Next) -> Next;
 
-loop(Next, Who) -> 
-  receive
-    {Msg, N, P} ->  io:format("[~p]: message ~p acknowledged, ~p time\n", [Who, Msg, N]),
-                    Next!{Msg, N, P},
-                    io:format("[~p]: message ~p sent to ~p, ~p time\n", [Who, Msg, Next, N]),
-                    loop(Next, Who);
-    stop -> io:format("[~p]: stop\n", [Who]),
-            Next ! stop;
-    other -> io:format("[~p]: i received something i cant explain\n", Who)
-  end.
+create_ring(N, Next) ->
+    io:format("Worker ~p: created!\n", [N]), 
+    create_ring(N-1, spawn(fun() -> worker_loop(N, Next) end)).
 
-last_loop(Next, Who) -> 
-  receive
-    {Msg, N, P} ->  io:format("[~p]: message ~p acknowledged, ~p time\n", [Who, Msg, N]),
-                      Next!{Msg, N, P},
-                      io:format("[~p]: message ~p sent to ~p, ~p time\n", [Who, Msg, Next, N]),
-                      last_loop(Next, Who);
-    stop -> io:format("[~p]: stop \n", [Who]),
-            exit(normal),
-            unregister(first);
-    other -> io:format("[~p]: i received something i cant explain\n", Who)
-  end.
+first_worker_loop(N, M, Next) -> 
+    receive 
+        {new_next, Pid, Sender} ->
+            Sender!{received},
+            first_worker_loop(N, M, Pid); 
+
+        {first_msg, Msg} -> 
+            Next!{msg, Msg, 1},
+            first_worker_loop(N, M, Next);
+
+        {msg, Msg, C} when C-1 > M -> 
+            io:format("Worker ~p: received message ~p ~p\n", [N, Msg, C]),
+            Next!{stop}, 
+            io:format("Worker ~p: stop!\n", [N]),
+            exit("normal");
+
+        {msg, Msg, C} -> 
+            Next!{msg, Msg, C+1},
+            io:format("Worker ~p: received message ~p ~p\n", [N, Msg, C]),
+            first_worker_loop(N, M-1, Next);
+        
+        Any -> 
+            io:format("Worker ~p: i received unknown ~p \n", [N, Any]),
+            first_worker_loop(N, M, Next)
+    end.
+
+worker_loop(N, Next) -> 
+    receive 
+        {msg, Msg,  C} -> 
+            Next!{msg, Msg, C},
+            io:format("Worker ~p: received message ~p ~p\n", [N, Msg, C]),
+            worker_loop(N, Next);
+        {stop} ->
+            Next!{stop}, 
+            io:format("Worker ~p: stop!\n", [N]),
+            exit(normal);
+        Any -> 
+            io:format("Worker ~p: i received unknown ~p \n", [N, Any]),
+            worker_loop(N, Next)
+    end.
+   
