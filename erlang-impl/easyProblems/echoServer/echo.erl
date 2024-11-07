@@ -1,36 +1,47 @@
 -module(echo).
--export([start/0, print/1, stop/0, loop/0]).
+-export([start/0, print/1, stop/0]).
 
-start() ->  try 
-                register(server, spawn(?MODULE, loop, []))
-            catch
-                error:badarg -> io:format("The echo server is already started~n")
-            end,
-            ok.
-
-
-print(Term) ->  try
-                    server!{input, Term}
-                catch 
-                    error:badarg -> io:format("The echo server has not started yet, try to run 'echo:start()'  and then rerun this command~n")
-                end,
-                ok.
-
-stop() ->   try
-                server!{stop, "stop"}
-            catch 
-                error:badarg -> io:format("The echo server has not started yet, try to run 'echo:start()' and then rerun this command~n")
-            end,
-            ok.   
-
-loop() -> 
-    receive 
-        {input, M} ->   io:format("~p: ~p~n", [server, M]),
-                        loop();
-        {stop, _}  ->   io:format("~p stopping \n", [server]),
-                        exit(stopped);
-        other ->    io:format("~p: error", [server]),
-                    loop()
+start() -> 
+    case whereis(client) of 
+        undefined -> 
+            Client = spawn(fun() -> create_client() end),
+            register(client, Client),
+            ok;
+        _ -> 
+            unregister(client),
+            start()
     end.
-    
+        
+print(Message) ->  
+    whereis(client)!{print, Message}, 
+    ok.
 
+stop() -> 
+    whereis(client)!stop,
+    ok. 
+
+create_client() -> 
+    case whereis(server) of 
+        undefined -> 
+            Server = spawn_link(fun() -> server_loop() end),
+            register(server, Server),
+            client_loop();
+        _ -> 
+            unregister(server),
+            create_client()
+    end.
+
+client_loop() -> 
+    receive
+        {print, Message} -> 
+            whereis(server)!{print, Message},
+            client_loop();
+        stop -> exit(kill)
+    end.
+
+server_loop() -> 
+    receive
+        {print, Message} -> 
+            io:format("Server: ~p\n", [Message]),
+            server_loop()
+    end.
