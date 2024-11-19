@@ -1,0 +1,6 @@
+-module(master_server).
+-export([start/0]).
+
+start() -> ok.
+
+
